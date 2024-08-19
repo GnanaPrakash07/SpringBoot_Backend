@@ -32,6 +32,9 @@
 			<sonar.host.url>http://localhost:9000</sonar.host.url>
 			<sonar.login>squ_25a85c64da598b08c4d56d6436b446dcb7ab551d</sonar.login>
 
+			<sonar.organization>pgbooking</sonar.organization>
+			<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
 	</properties>
 	<dependencies>
 		<dependency>
