@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: pgBooking
+  profiles:
+    active: dev
+
+# Additional configuration can go here

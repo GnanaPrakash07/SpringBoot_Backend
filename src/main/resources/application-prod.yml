@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: pgBooking
+  data:
+    mongodb:
+      uri: mongodb+srv://gnana1210847:YtVqQ3wT1Wp1y7f4@cluster0.atq0vga.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+      database: pGDB
+      auto-index-creation: true
+  main:
+    allow-circular-references: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: latchignanaprakash@gmail.com
+    password: uvzv jtfp yoci nuat
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+  redis:
+    host: redis-14757.c301.ap-south-1-1.ec2.redns.redis-cloud.com
+    port: 14757
+    password: Gp1685520@
+  kafka:
+    bootstrap-servers: pkc-12576z.us-west2.gcp.confluent.cloud:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: Email-services-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.trusted.packages: com.pgBooking.pgBooking.model
+        session.timeout.ms: 45000
+    properties:
+      security.protocol: SASL_SSL
+      sasl.mechanism: PLAIN
+      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='S4VUWQS2TX6CTQAY' password='qkxhsuuv8kdfxPEB+Al1/r4OR9YWTr61SqMTMf+5gfKjkq9f6E2/hMgXYoePuLQ7';
+server:
+  port: 
+weather:
+  api:
+    key: da3cbb2dcd5cc3b430f75ddb8b476875
+logging:
+  level:
+    org.springframework.data.mongodb: DEBUG
+    com.mongodb: DEBUG
+    org.springframework.data.redis: DEBUG
+    io.lettuce.core: DEBUG
+    org.springframework.kafka: DEBUG
+    org.apache.kafka: DEBUG
