@@ -37,7 +37,7 @@ spring:
       sasl.mechanism: PLAIN
       sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username='S4VUWQS2TX6CTQAY' password='qkxhsuuv8kdfxPEB+Al1/r4OR9YWTr61SqMTMf+5gfKjkq9f6E2/hMgXYoePuLQ7';
 server:
-  port: 
+  port: 8084
 weather:
   api:
     key: da3cbb2dcd5cc3b430f75ddb8b476875
