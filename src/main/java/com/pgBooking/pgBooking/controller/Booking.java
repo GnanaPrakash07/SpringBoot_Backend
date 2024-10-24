@@ -3,6 +3,7 @@ package com.pgBooking.pgBooking.controller;
 import com.pgBooking.pgBooking.entry.BookingEntry;
 import com.pgBooking.pgBooking.entry.User;
 import com.pgBooking.pgBooking.service.BookingService;
+import com.pgBooking.pgBooking.service.EmailService;
 import com.pgBooking.pgBooking.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/booking")
 public class Booking {
+
     @Autowired
     private BookingService bookingService;
     @Autowired

@@ -1,8 +1,10 @@
 package com.pgBooking.pgBooking.service;
 
 import com.pgBooking.pgBooking.entry.BookingEntry;
+import com.pgBooking.pgBooking.entry.PgEntry;
 import com.pgBooking.pgBooking.entry.User;
 import com.pgBooking.pgBooking.repository.BookingRepository;
+import com.pgBooking.pgBooking.repository.UserEntryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,13 @@ import java.util.Optional;
 @Slf4j
 public class BookingService {
     @Autowired
+    private EmailService emailService;
+    @Autowired
     private BookingRepository bookingRepository;
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserEntryRepository userRepository;
     @Transactional
     public void saveEntry(BookingEntry bookingEntry, String userName){
         try {
@@ -28,11 +34,11 @@ public class BookingService {
             BookingEntry saved = bookingRepository.save(bookingEntry);
             user.getBookingEntries().add(saved);
             userService.saveEntry(user);
+            sendBookingConfirmationEmail(saved, user); // Pass the actual saved user
         }catch (Exception e){
             System.out.println(e);
             throw new RuntimeException("An error occured while saving the entry",e);
         }
-
     }
     public void saveEntry(BookingEntry bookingEntry){
         bookingRepository.save(bookingEntry);
@@ -63,5 +69,23 @@ public class BookingService {
    public void save(BookingEntry bookingEntry) {
        bookingRepository.save(bookingEntry);
     }
+    private void sendBookingConfirmationEmail(BookingEntry bookingEntry, User user) {
+        if (user != null) {
+            StringBuilder emailContent = new StringBuilder();
+            emailContent.append("Dear ").append(user.getUserName()).append(",\n\n");
+            emailContent.append("Here are your booking details:\n");
 
+            emailContent.append("Booking ID: ").append(bookingEntry.getId()).append("\n");
+            emailContent.append("Booking Date: ").append(bookingEntry.getBookingDate()).append("\n");
+
+            for (PgEntry pgEntry : bookingEntry.getPgEntries()) {
+                emailContent.append("PG Name: ").append(pgEntry.getName()).append("\n");
+            }
+
+            emailContent.append("\nThank you for booking with us!");
+
+            // Send the email
+            emailService.sendEmail(user.getEmail(), "Your Booking Details", emailContent.toString());
+        }
+    }
 }
